@@ -1,7 +1,7 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+no_c = __import__('5-no_c').no_c
 
-
-def no_c(my_string):
-    copy_str = [x for x in my_string if x != 'c' or x != 'C']
-    return ("".join(copy_str))
+print(no_c("Best School"))
+print(no_c("Chicago"))
+print(no_c("C is fun!"))
 
