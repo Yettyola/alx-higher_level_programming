@@ -100,5 +100,5 @@ void print_python_float(PyObject *p)
 	buffer = PyOS_double_to_string(float_obj->ob_fval, 'r', 0,
 			Py_DTSF_ADD_DOT_0, NULL);
 	printf("  value: %s\n", buffer);
-	PyMe_Free(buffer);
+	PyMem_Free(buffer);
 }
