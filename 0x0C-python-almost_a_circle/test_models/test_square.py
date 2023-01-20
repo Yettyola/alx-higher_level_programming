@@ -124,5 +124,4 @@ class TestSquare(unittest.TestCase):
         self.assertDictEqual(o4.to_dictionary(), d4)
 
 if __name__ == '__main__':
-    unittest
-.main()
+    unittest.main()
