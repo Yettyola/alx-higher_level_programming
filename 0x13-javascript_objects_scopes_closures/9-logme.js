@@ -1,7 +1,5 @@
 #!/usr/bin/node
-// JS Script
-let n = 0;
+let count = 0;
 exports.logMe = function (item) {
-  console.log(n + ': ' + item);
-  n++;
+  console.log(`${count++}: ${item}`);
 };
