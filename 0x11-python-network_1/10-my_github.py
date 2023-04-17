@@ -1,22 +1,12 @@
 #!/usr/bin/python3
-"""Check status"""
-import requests
-from requests.auth import HTTPBasicAuth
-import sys
+"""displays the value of the X-Request-Id variable found in
+the header of the response.
+"""
 
-
-def searchapi():
-    """status"""
-    user = str(sys.argv[1])
-    pw = str(sys.argv[2])
-    result = requests.get("https://api.github.com/user",
-                          auth=(HTTPBasicAuth(user, pw)))
-
-    try:
-        data = result.json()
-        print(data["id"])
-    except:
-        print("None")
 
 if __name__ == "__main__":
-    searchapi()
+    from requests import get
+    from sys import argv
+
+    r = get('https://api.github.com/user', auth=(argv[1], argv[2]))
+    print(r.json().get('id'))
