@@ -1,19 +1,16 @@
 #!/usr/bin/python3
-"""Send request"""
-import urllib.request
-import urllib.error
-import sys
+"""displays the value of the X-Request-Id variable found in
+the header of the response.
+"""
 
-
-def sender():
-    """sender"""
-    try:
-        with urllib.request.urlopen(sys.argv[1]) as response:
-            html = response.read()
-            print(html.decode("utf-8"))
-    except urlli
-b.error.HTTPError as e:
-        print("Error code: {}".format(e.code))
 
 if __name__ == "__main__":
-    sender()
+    from urllib.request import urlopen
+    from urllib.error import HTTPError
+    from sys import argv
+
+    try:
+        with urlopen(argv[1]) as response:
+            print(response.read().decode('utf-8'))
+    except HTTPError as error:
+        print('Error code:', error.code)
