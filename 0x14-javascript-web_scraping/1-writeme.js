@@ -1,9 +1,9 @@
 #!/usr/bin/node
-// JS Script
-let fs = require('fs');
-let argstr = process.argv[3];
-fs.writeFile(process.argv[2], argstr, function (err, argstr) {
-  if (err) {
-    console.log(err);
-  }
-});
+
+const fs = require('fs');
+
+try {
+  fs.writeFile(process.argv[2], process.argv[3], 'utf8', function (err, result) { if (err) console.log(err); });
+} catch (err) {
+  console.log(err);
+}`
