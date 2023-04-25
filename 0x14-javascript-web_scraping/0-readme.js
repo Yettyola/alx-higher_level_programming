@@ -1,10 +1,11 @@
 #!/usr/bin/node
-// JS Script
-let fs = require('fs');
-fs.readFile(process.argv[2], function (err, contents) {
-  if (!err) {
-    console.log(contents.toString().trim());
-  } else {
+
+const fs = require('fs');
+
+fs.readFile(process.argv[2], 'utf-8', function (err, result) {
+  if (err) {
     console.log(err);
+  } else {
+    console.log(result);
   }
 });
