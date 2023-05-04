@@ -1,13 +1,9 @@
-// JQuery
 $.ajax({
-  url: 'https://swapi.co/api/films/?format=json',
   type: 'GET',
-  dataType: 'json'
-})
-  .done(function (json) {
-    let titles = json.r
-esults;
-    for (let i = 0; i < titles.length; i++) {
-      $('UL#list_movies').append('<li>' + titles[i].title + '</li>');
-    }
-  });
+  url: 'https://swapi-api.alx-tools.com/api/films/?format=json',
+  success: function (data) {
+    $.each(data.results, function (i, film) {
+      $('UL#list_movies').append('<li>' + film.title + '</li>');
+    });
+  }
+});
