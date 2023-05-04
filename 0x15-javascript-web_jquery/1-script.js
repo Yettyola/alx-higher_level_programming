@@ -1,2 +1,1 @@
-// JQuery
-$('header').css('color', 'red');
+$('HEADER').css({ color: '#FF0000' });
