@@ -1,0 +1,69 @@
+const { MongoClient } = require('mongodb');
+
+const uri = 'mongodb://localhost:27017'; // Replace with your MongoDB connection string
+const client = new MongoClient(uri);
+
+async function connectToDatabase() {
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB');
+    return client.db('todoapp'); // Replace 'todoapp' with your database name
+  } catch (error) {
+    console.error('Error connecting to MongoDB', error);
+    throw error;
+  }
+}
+
+async function createTask(task) {
+  const db = client.db('todoapp');
+  const tasksCollection = db.collection('tasks');
+  const result = await tasksCollection.insertOne(task);
+  console.log('Task created:', result.insertedId);
+  return result.insertedId;
+}
+
+async function getTasks() {
+  const db = client.db('todoapp');
+  const tasksCollection = db.collection('tasks');
+  const tasks = await tasksCollection.find().toArray();
+  console.log('Tasks:', tasks);
+  return tasks;
+}
+
+async function updateTask(taskId, updates) {
+  const db = client.db('todoapp');
+  const tasksCollection = db.collection('tasks');
+  const result = await tasksCollection.updateOne({ _id: taskId }, { $set: updates });
+  console.log('Task updated:', result.modifiedCount);
+  return result.modifiedCount;
+}
+
+async function deleteTask(taskId) {
+  const db = client.db('todoapp');
+  const tasksCollection = db.collection('tasks');
+  const result = await tasksCollection.deleteOne({ _id: taskId });
+  console.log('Task deleted:', result.deletedCount);
+  return result.deletedCount;
+}
+
+// Usage example
+async function main() {
+  const db = await connectToDatabase();
+
+  // Create a task
+  const taskId = await createTask({ name: 'Do the laundry', status: 'incomplete' });
+
+  // Get all tasks
+  const tasks = await getTasks();
+
+  // Update a task
+  await updateTask(taskId, { status: 'completed' });
+
+  // Delete a task
+  await deleteTask(taskId);
+
+  // Close the MongoDB connection
+  await client.close();
+}
+
+main().catch(console.error);
