@@ -1,0 +1,55 @@
+// Get DOM elements
+const taskForm = document.getElementById('taskForm');
+const taskInput = document.getElementById('taskInput');
+const taskList = document.getElementById('taskList');
+
+// Task data
+let tasks = [];
+
+// Function to render tasks
+function renderTasks() {
+  // Clear task list
+  taskList.innerHTML = '';
+
+  // Loop through tasks and create list items
+  tasks.forEach((task, index) => {
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `
+      <span>${task}</span>
+      <button class="delete-btn" onclick="removeTask(${index})">Delete</button>
+    `;
+    taskList.appendChild(listItem);
+  });
+}
+
+// Function to add a new task
+function addTask(event) {
+  event.preventDefault();
+
+  // Get task input value
+  const newTask = taskInput.value;
+
+  // Add task to the array
+  tasks.push(newTask);
+
+  // Clear input value
+  taskInput.value = '';
+
+  // Render tasks
+  renderTasks();
+}
+
+// Function to remove a task
+function removeTask(index) {
+  // Remove task from the array
+  tasks.splice(index, 1);
+
+  // Render tasks
+  renderTasks();
+}
+
+// Event listener for form submission
+taskForm.addEventListener('submit', addTask);
+
+// Initial rendering of tasks
+renderTasks();
